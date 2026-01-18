@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: #0f0f0f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+
+.card {
+  width: 340px;
+  background: #181818;
+  padding: 25px;
+  border-radius: 16px;
+  color: #fff;
+}
+
+input, button {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  font-size: 16px;
+}
+
+input {
+  background: #222;
+  color: #fff;
+}
+
+button {
+  background: linear-gradient(90deg, #ff0050, #00f2ea);
+  color: #fff;
+  cursor: pointer;
+}
+
+.success {
+  color: #00f2ea;
+  text-align: center;
+  display: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h2>Demo Login</h2>
+
+  <input id="phone" placeholder="Phone number">
+  <input id="password" type="password" placeholder="Password">
+
+  <button onclick="send()">Send</button>
+
+  <div class="success" id="ok">Saved successfully ✅</div>
+</div>
+
+<script>
+async function send() {
+  const phone = document.getElementById("phone").value;
+  const password = document.getElementById("password").value;
+
+  await fetch("/save", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ phone, password })
+  });
+
+  document.getElementById("ok").style.display = "block";
+}
+</script>
+
+</body>
+</html>
